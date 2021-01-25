@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Defio - 12 challenge</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_web_client_id">371609827087-s3v1q10lm451qd7kp3aimams8p752g80.apps.googleusercontent.com</string>
+
+</resources>
