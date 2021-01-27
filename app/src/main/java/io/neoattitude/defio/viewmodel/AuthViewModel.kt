@@ -4,18 +4,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.neoattitude.defio.data.model.AuthCriteria
 import io.neoattitude.defio.data.repository.AuthRepository
+import io.neoattitude.defio.util.Resource
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
     private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
-    private val token: MutableLiveData<String> = MutableLiveData()
+    val token: MutableLiveData<Resource<String>> = MutableLiveData()
 
     fun signIn(idToken: String?) {
         viewModelScope.launch {
-            val response = authRepository.signIn(AuthCriteria(idToken))
-            token.postValue(response.body())
+            token.postValue(Resource.Loading())
+            try {
+                val response = authRepository.signIn(AuthCriteria(idToken))
+                token.postValue(handleResponse(response))
+            } catch (t: Throwable) {
+                token.postValue(Resource.Error(t.message!!))
+            }
         }
     }
 }

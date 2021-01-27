@@ -27,9 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
 
     override fun businessLogic() {
-        authViewModel.tokenList.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it.size.toString(), Toast.LENGTH_LONG).show()
-        }
+        setObserver()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.google_web_client_id))
@@ -56,11 +54,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            if (account?.idToken != null){
+            if (account?.idToken != null) {
                 authViewModel.signIn(account.idToken)
             }
             binding.tv.text = account!!.displayName
         } catch (e: ApiException) {
         }
+    }
+
+    private fun setObserver() {
+        authViewModel.token.observe(viewLifecycleOwner, {
+            Toast.makeText(requireContext(), it.data, Toast.LENGTH_LONG).show()
+        })
     }
 }
