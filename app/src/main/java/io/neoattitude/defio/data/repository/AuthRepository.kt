@@ -10,7 +10,8 @@ class AuthRepository(
     private val authApi: AuthApi,
     private val tokenDao: TokenDao
 ) {
-    fun signIn(authCriteria: AuthCriteria) = authApi.signIn(authCriteria)
+    suspend fun signIn(authCriteria: AuthCriteria) = authApi.signIn(authCriteria)
+
     suspend fun insertToken(token: String) {
         tokenDao.insert(Token(null, token))
     }
