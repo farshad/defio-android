@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -26,6 +27,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FragmentLoginBinding = FragmentLoginBinding.inflate(inflater, container, false)
+
+    override fun bindView() {
+        super.progressLoading = binding.progressLoading
+    }
 
     override fun businessLogic() {
         setObserver()
@@ -55,10 +60,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            if (account?.idToken != null) {
-                authViewModel.signIn(account.idToken)
+            account?.idToken.let {
+                authViewModel.signIn(it)
             }
-            binding.tv.text = account!!.displayName
         } catch (e: ApiException) {
         }
     }
@@ -67,21 +71,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         authViewModel.token.observe(viewLifecycleOwner, {
             when (it) {
                 is Resource.Success -> {
-                    //hideProgressBar()
+                    hideProgressBar()
+                    binding.progressLoading
                     it.data?.let { data ->
-                        Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
+                        Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                            .navigate(R.id.action_splashFragment_to_homeFragment)
+                        authViewModel.insertToken(data)
                     }
                 }
                 is Resource.Error -> {
-                    //hideProgressBar()
+                    hideProgressBar()
                     it.message?.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
                     }
                 }
                 is Resource.Loading -> {
-                    //showProgressBar()
+                    showProgressBar()
                 }
             }
         })
     }
+
+
 }

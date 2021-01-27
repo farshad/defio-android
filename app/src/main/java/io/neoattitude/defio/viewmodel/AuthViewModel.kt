@@ -12,6 +12,7 @@ class AuthViewModel(
 ) : BaseViewModel() {
 
     val token: MutableLiveData<Resource<String>> = MutableLiveData()
+    val isTokenExist: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     fun signIn(idToken: String?) {
         viewModelScope.launch {
@@ -22,6 +23,14 @@ class AuthViewModel(
             } catch (t: Throwable) {
                 token.postValue(Resource.Error(t.message!!))
             }
+        }
+    }
+
+    fun insertToken(token: String) = viewModelScope.launch { authRepository.insertToken(token) }
+
+    fun checkTokenExist() {
+        viewModelScope.launch {
+            isTokenExist.postValue(authRepository.isTokenExist().value)
         }
     }
 }

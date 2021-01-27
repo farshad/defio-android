@@ -1,6 +1,7 @@
 package io.neoattitude.defio.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.neoattitude.defio.data.api.AuthApi
 import io.neoattitude.defio.data.dao.TokenDao
 import io.neoattitude.defio.data.entity.Token
@@ -16,11 +17,12 @@ class AuthRepository(
         tokenDao.insert(Token(null, token))
     }
 
-    fun fetchAll(): LiveData<List<Token>>? {
-        return tokenDao.fetchAll()
-    }
-
-    fun fetchLast(): Token? {
-        return tokenDao.fetchLast()
+    fun isTokenExist(): LiveData<Boolean> {
+        val tokenExist = MutableLiveData(false)
+        val token: Token? = tokenDao.fetchLast()
+        token?.value?.let {
+            tokenExist.value = true
+        }
+        return tokenExist
     }
 }
