@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
     single(createdAtStart = true) { provideRetrofit() }
-    factory { provideAuthApi(get()) }
+    single { createApiService<AuthApi>(get()) }
 }
 
 private fun provideRetrofit(): Retrofit {
@@ -26,4 +26,4 @@ private fun provideRetrofit(): Retrofit {
         .build();
 }
 
-private fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+inline fun <reified T> createApiService(retrofit: Retrofit): T = retrofit.create(T::class.java)
