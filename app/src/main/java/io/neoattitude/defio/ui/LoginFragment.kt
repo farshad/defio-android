@@ -75,7 +75,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     binding.progressLoading
                     it.data?.let { data ->
                         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                            .navigate(R.id.action_splashFragment_to_homeFragment)
+                            .navigate(R.id.action_loginFragment_to_homeFragment)
                         authViewModel.insertToken(data)
                     }
                 }
