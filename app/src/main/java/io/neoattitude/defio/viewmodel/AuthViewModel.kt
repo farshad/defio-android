@@ -28,6 +28,8 @@ class AuthViewModel(
 
     fun insertToken(token: String) = viewModelScope.launch { authRepository.insertToken(token) }
 
+    fun deleteAll() = viewModelScope.launch { authRepository.deleteAll() }
+
     fun checkTokenExist() {
         viewModelScope.launch {
             isTokenExist.postValue(authRepository.isTokenExist().value)

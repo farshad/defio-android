@@ -19,5 +19,5 @@ interface TokenDao {
     fun fetchAll(): LiveData<List<Token>>?
 
     @Query("delete from token")
-    fun deleteAll()
+    suspend fun deleteAll()
 }

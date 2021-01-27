@@ -16,6 +16,9 @@ class AuthRepository(
     suspend fun insertToken(token: String) {
         tokenDao.insert(Token(null, token))
     }
+    suspend fun deleteAll() {
+        tokenDao.deleteAll()
+    }
 
     fun isTokenExist(): LiveData<Boolean> {
         val tokenExist = MutableLiveData(false)
