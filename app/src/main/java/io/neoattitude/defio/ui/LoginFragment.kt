@@ -61,7 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             account?.idToken.let {
-                authViewModel.signIn("it")
+                authViewModel.signIn(it)
             }
         } catch (e: ApiException) {
         }
