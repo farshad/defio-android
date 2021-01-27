@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task
 import io.neoattitude.defio.R
 import io.neoattitude.defio.databinding.FragmentLoginBinding
 import io.neoattitude.defio.ui.base.BaseFragment
+import io.neoattitude.defio.util.Resource
 import io.neoattitude.defio.viewmodel.AuthViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -64,7 +65,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private fun setObserver() {
         authViewModel.token.observe(viewLifecycleOwner, {
-            Toast.makeText(requireContext(), it.data, Toast.LENGTH_LONG).show()
+            when (it) {
+                is Resource.Success -> {
+                    //hideProgressBar()
+                    it.data?.let { data ->
+                        Toast.makeText(requireContext(), data, Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Error -> {
+                    //hideProgressBar()
+                    it.message?.let { message ->
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                    }
+                }
+                is Resource.Loading -> {
+                    //showProgressBar()
+                }
+            }
         })
     }
 }
