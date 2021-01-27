@@ -7,13 +7,10 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val databaseModule = module {
-    fun provideDatabase(application: Application): DefioDatabase {
-        return DefioDatabase.getDatabase(application)
-    }
+    fun provideDatabase(application: Application): DefioDatabase =
+        DefioDatabase.getDatabase(application)
 
-    fun provideTokenDao(database: DefioDatabase): TokenDao {
-        return  database.tokenDao()
-    }
+    fun provideTokenDao(database: DefioDatabase): TokenDao = database.tokenDao()
 
     single { provideDatabase(androidApplication()) }
     single { provideTokenDao(get()) }

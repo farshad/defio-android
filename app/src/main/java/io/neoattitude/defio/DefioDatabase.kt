@@ -26,6 +26,7 @@ abstract class DefioDatabase : RoomDatabase() {
                     "defio_database"
                 )
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build()
                 INSTANCE = instance
                 instance

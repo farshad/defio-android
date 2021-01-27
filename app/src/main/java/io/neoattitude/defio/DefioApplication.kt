@@ -13,7 +13,7 @@ class DefioApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@DefioApplication)
-            modules(listOf(networkModule, databaseModule, repositoryModule, viewModelModule))
+            modules(listOf(databaseModule, networkModule, repositoryModule, viewModelModule))
         }
     }
 }

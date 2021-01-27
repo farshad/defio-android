@@ -6,8 +6,11 @@ import androidx.navigation.Navigation
 import io.neoattitude.defio.R
 import io.neoattitude.defio.databinding.FragmentSplashBinding
 import io.neoattitude.defio.ui.base.BaseFragment
+import io.neoattitude.defio.viewmodel.AuthViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment<FragmentSplashBinding>() {
+    private val authViewModel: AuthViewModel by viewModel()
 
     override fun setViewBinding(
         inflater: LayoutInflater,
@@ -15,10 +18,21 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
     ): FragmentSplashBinding = FragmentSplashBinding.inflate(inflater, container, false)
 
     override fun businessLogic() {
-        binding.navTo.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-                .navigate(R.id.action_splashFragment_to_loginFragment)
-        }
+        authViewModel.checkTokenExist()
+        authViewModel.isTokenExist.observe(viewLifecycleOwner, {
+            when (it) {
+                true -> {
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_splashFragment_to_homeFragment)
+                }
+                false -> {
+                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                        .navigate(R.id.action_splashFragment_to_loginFragment)
+                }
+            }
+        })
     }
+
+    override fun bindView() {}
 
 }
