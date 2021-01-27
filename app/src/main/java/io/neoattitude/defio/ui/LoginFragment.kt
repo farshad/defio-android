@@ -3,7 +3,6 @@ package io.neoattitude.defio.ui
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -14,6 +13,7 @@ import com.google.android.gms.tasks.Task
 import io.neoattitude.defio.R
 import io.neoattitude.defio.databinding.FragmentLoginBinding
 import io.neoattitude.defio.ui.base.BaseFragment
+import io.neoattitude.defio.util.Helper.snack
 import io.neoattitude.defio.util.Resource
 import io.neoattitude.defio.viewmodel.AuthViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -61,7 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             account?.idToken.let {
-                authViewModel.signIn(it)
+                authViewModel.signIn("it")
             }
         } catch (e: ApiException) {
         }
@@ -72,7 +72,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             when (it) {
                 is Resource.Success -> {
                     hideProgressBar()
-                    binding.progressLoading
                     it.data?.let { data ->
                         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                             .navigate(R.id.action_loginFragment_to_homeFragment)
@@ -82,7 +81,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 is Resource.Error -> {
                     hideProgressBar()
                     it.message?.let { message ->
-                        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                        view?.snack(message)
                     }
                 }
                 is Resource.Loading -> {
@@ -91,6 +90,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         })
     }
-
-
 }

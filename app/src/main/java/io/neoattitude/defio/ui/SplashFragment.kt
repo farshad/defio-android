@@ -33,8 +33,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>() {
         })
     }
 
-    override fun bindView() {
-
-    }
+    override fun bindView() {}
 
 }
