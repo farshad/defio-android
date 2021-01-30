@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
         bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.homeFragment) {
+            if (destination.id == R.id.homeFragment || destination.id == R.id.challengeListFragment) {
                 bottomNavigationView.visibility = View.VISIBLE
             } else {
                 bottomNavigationView.visibility = View.GONE
