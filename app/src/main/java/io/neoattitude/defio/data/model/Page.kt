@@ -1,6 +1,6 @@
 package io.neoattitude.defio.data.model
 
-data class ResponseModel<T>(
+data class Page<T>(
     val content: List<T>,
     val pageable: Pageable,
     val last: Boolean,

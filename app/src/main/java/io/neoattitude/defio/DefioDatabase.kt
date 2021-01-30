@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import io.neoattitude.defio.data.dao.TokenDao
 import io.neoattitude.defio.data.entity.Token
 
-@Database(entities = [Token::class], version = 2, exportSchema = false)
+@Database(entities = [Token::class], version = 3, exportSchema = false)
 abstract class DefioDatabase : RoomDatabase() {
 
     abstract fun tokenDao(): TokenDao

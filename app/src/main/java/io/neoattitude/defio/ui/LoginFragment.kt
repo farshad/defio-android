@@ -73,10 +73,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 is Resource.Success -> {
                     hideProgressBar()
                     it.data?.let { data ->
+                        authViewModel.insertToken(data)
                         Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
                             .navigate(R.id.action_loginFragment_to_homeFragment)
-                        authViewModel.deleteAll()
-                        authViewModel.insertToken(data)
                     }
                 }
                 is Resource.Error -> {
