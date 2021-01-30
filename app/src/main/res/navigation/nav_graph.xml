@@ -41,4 +41,9 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph" />
     </fragment>
+    <fragment
+        android:id="@+id/challengaListFragment"
+        android:name="io.neoattitude.defio.ChallengaListFragment"
+        android:label="fragment_challenga_list"
+        tools:layout="@layout/fragment_challenge_list" />
 </navigation>
