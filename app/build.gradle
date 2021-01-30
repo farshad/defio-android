@@ -24,7 +24,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             buildConfigField "String", "BASE_URL", "\"http://192.168.10.180:8080/\""
         }
     }
@@ -57,7 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 
-    def nav_version = "2.3.2"
+    def nav_version = "2.3.3"
 
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -76,7 +76,7 @@ dependencies {
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
-    def koin_version= "2.2.1"
+    def koin_version = "2.2.1"
     // Koin for Android
     implementation "org.koin:koin-android:$koin_version"
     // Koin Android Scope feature
