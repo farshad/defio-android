@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.neoattitude.defio.data.model.Challenge
 import io.neoattitude.defio.databinding.ItemChallengeBinding
+import io.neoattitude.defio.util.Helper.countToString
 
 class ChallengeAdopter :
     RecyclerView.Adapter<ChallengeAdopter.ChallengeViewHolder>() {
@@ -49,6 +50,8 @@ class ChallengeAdopter :
         val item = differ.currentList[position]
         holder.binding.apply {
             tvChallengeTitle.text = item.title
+            tvParticipant.text = countToString(item.participantCount)
+
             item.icon.let {
                 ivChallengeIcon.setImageResource(setDrawable(it))
             }

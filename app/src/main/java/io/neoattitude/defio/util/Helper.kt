@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import io.neoattitude.defio.R
+
 object Helper {
     fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
         Snackbar.make(this, message, duration).show()
@@ -20,5 +21,24 @@ object Helper {
         return decorator
     }
 
+    fun countToString(count: Int): String {
+        return when (count) {
+            in 1000..9999 -> {
+                count.toString().substring(0, 1) + "k"
+            }
+            in 10000..99999 -> {
+                count.toString().substring(0, 2) + "k"
+            }
+            in 100000..999999 -> {
+                count.toString().substring(0, 3) + "k"
+            }
+            in 1000000..9999999 -> {
+                count.toString().substring(0, 1) + "m"
+            }
+            else -> {
+                count.toString()
+            }
+        }
+    }
 }
 
