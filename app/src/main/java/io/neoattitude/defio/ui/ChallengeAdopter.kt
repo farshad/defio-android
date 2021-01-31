@@ -2,6 +2,7 @@ package io.neoattitude.defio.ui
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -51,6 +52,9 @@ class ChallengeAdopter :
         holder.binding.apply {
             tvChallengeTitle.text = item.title
             tvParticipant.text = countToString(item.participantCount)
+            if (item.id == 53L) {
+                ivDone.visibility = View.VISIBLE
+            }
 
             item.icon.let {
                 ivChallengeIcon.setImageResource(setDrawable(it))

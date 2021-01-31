@@ -44,6 +44,18 @@
     <fragment
         android:id="@+id/challengeListFragment"
         android:name="io.neoattitude.defio.ui.ChallengeListFragment"
-        android:label="fragment_challenga_list"
-        tools:layout="@layout/fragment_challenge_list" />
+        android:label="fragment_challenge_list"
+        tools:layout="@layout/fragment_challenge_list" >
+        <action
+            android:id="@+id/action_challengeListFragment_to_challengeFragment"
+            app:destination="@id/challengeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/challengeFragment"
+        android:name="io.neoattitude.defio.ui.ChallengeFragment"
+        android:label="fragment_challenge"
+        tools:layout="@layout/fragment_challenge" />
 </navigation>

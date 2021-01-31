@@ -13,13 +13,22 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp"
     app:contentPadding="10dp"
-    app:strokeColor="@color/card_border"
     app:strokeWidth="1dp"
     card_view:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivDone"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_badge"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivChallengeIcon"

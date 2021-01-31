@@ -3,6 +3,8 @@ package io.neoattitude.defio.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import io.neoattitude.defio.R
 import io.neoattitude.defio.databinding.FragmentChallengeListBinding
 import io.neoattitude.defio.ui.base.BaseFragment
 import io.neoattitude.defio.util.Helper.snack
@@ -32,6 +34,9 @@ class ChallengeListFragment : BaseFragment<FragmentChallengeListBinding>() {
             val bundle = Bundle().apply {
                 putString("title", it.title)
             }
+
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+                .navigate(R.id.action_challengeListFragment_to_challengeFragment)
         }
     }
 
