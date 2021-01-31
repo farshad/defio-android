@@ -52,7 +52,7 @@ class ChallengeAdopter :
         holder.binding.apply {
             tvChallengeTitle.text = item.title
             tvParticipant.text = countToString(item.participantCount)
-            if (item.id == 53L) {
+            if (item.id == 54L || item.id == 58L) {
                 ivDone.visibility = View.VISIBLE
             }
 
