@@ -1,19 +1,18 @@
 package io.neoattitude.defio.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import io.neoattitude.defio.R
 import io.neoattitude.defio.data.model.Challenge
+import io.neoattitude.defio.databinding.ItemChallengeBinding
 
 class ChallengeAdopter :
     RecyclerView.Adapter<ChallengeAdopter.ChallengeViewHolder>() {
 
-    inner class ChallengeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class ChallengeViewHolder(val binding: ItemChallengeBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object : DiffUtil.ItemCallback<Challenge>() {
         override fun areItemsTheSame(oldItem: Challenge, newItem: Challenge): Boolean {
@@ -29,8 +28,8 @@ class ChallengeAdopter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
         return ChallengeViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_challenge,
+            ItemChallengeBinding.inflate(
+                LayoutInflater.from(parent.context),
                 parent,
                 false
             )
@@ -45,12 +44,9 @@ class ChallengeAdopter :
 
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
         val item = differ.currentList[position]
-        holder.itemView.apply {
-            val tv : TextView = findViewById(R.id.tvChallengeTitle)
-            tv.text = item.title
-            setOnClickListener {
-                onItemClickListener?.let { it(item) }
-            }
+        holder.binding.tvChallengeTitle.text = item.title
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(item) }
         }
     }
 
