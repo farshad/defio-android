@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progress_loading"
+        android:id="@+id/progressLoading"
         style="?android:attr/process"
         android:layout_width="40dp"
         android:layout_height="40dp"

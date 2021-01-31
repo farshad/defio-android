@@ -10,4 +10,7 @@
 
     <color name="divider">#edf2f7</color>
     <color name="background">#f5f8fa</color>
+
+    <color name="card_border">#e2e8f0</color>
+    <color name="text">#1a202c</color>
 </resources>

@@ -1,5 +1,6 @@
 package io.neoattitude.defio.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -10,6 +11,7 @@ import io.neoattitude.defio.databinding.ItemChallengeBinding
 
 class ChallengeAdopter :
     RecyclerView.Adapter<ChallengeAdopter.ChallengeViewHolder>() {
+    private lateinit var context: Context
 
     inner class ChallengeViewHolder(val binding: ItemChallengeBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -27,6 +29,7 @@ class ChallengeAdopter :
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
+        context = parent.context
         return ChallengeViewHolder(
             ItemChallengeBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -44,10 +47,24 @@ class ChallengeAdopter :
 
     override fun onBindViewHolder(holder: ChallengeViewHolder, position: Int) {
         val item = differ.currentList[position]
-        holder.binding.tvChallengeTitle.text = item.title
+        holder.binding.apply {
+            tvChallengeTitle.text = item.title
+            item.icon.let {
+                ivChallengeIcon.setImageResource(setDrawable(it))
+            }
+        }
+
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { it(item) }
         }
+    }
+
+    private fun setDrawable(icon: String): Int {
+        return context.resources.getIdentifier(
+            icon,
+            "drawable",
+            context.packageName
+        )
     }
 
     fun setOnItemClickListener(listener: (Challenge) -> Unit) {

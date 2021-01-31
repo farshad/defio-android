@@ -27,6 +27,7 @@ class ChallengeListFragment : BaseFragment<FragmentChallengeListBinding>() {
     }
 
     override fun bindView() {
+        super.progressLoading = binding.progressLoading
         challengeAdopter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putString("title", it.title)

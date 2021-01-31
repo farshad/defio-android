@@ -6,6 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ui.ChallengeListFragment">
 
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        style="?android:attr/process"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminate="true"
+        android:max="100"
+        android:progress="10"
+        android:visibility="gone"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rvChallenge"

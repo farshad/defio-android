@@ -6,5 +6,6 @@ data class Challenge(
     val description: String?,
     val viewCount: Int,
     val participantCount: Int,
-    val averageAge: Int
+    val averageAge: Int,
+    val icon: String
 )

@@ -32,6 +32,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         businessLogic()
+        bindView()
     }
 
     fun hideProgressBar() {

@@ -4,13 +4,13 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="@string/home" />
+        android:title="@string/Home" />
     <item
         android:id="@+id/challengeListFragment"
         android:icon="@drawable/ic_baseline_apps_24"
-        android:title="@string/challenge" />
+        android:title="@string/Challenge" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/settings" />
+        android:title="@string/Settings" />
 </menu>
