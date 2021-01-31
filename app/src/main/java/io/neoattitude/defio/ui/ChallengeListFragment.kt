@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.neoattitude.defio.databinding.FragmentChallengeListBinding
 import io.neoattitude.defio.ui.base.BaseFragment
-import io.neoattitude.defio.util.Helper.decorator
 import io.neoattitude.defio.util.Helper.snack
 import io.neoattitude.defio.util.Resource
 import io.neoattitude.defio.viewmodel.ChallengeViewModel
@@ -61,9 +60,6 @@ class ChallengeListFragment : BaseFragment<FragmentChallengeListBinding>() {
         challengeAdopter = ChallengeAdopter()
         binding.rvChallenge.apply {
             adapter = challengeAdopter
-            addItemDecoration(
-                decorator(context)
-            )
         }
     }
 }
